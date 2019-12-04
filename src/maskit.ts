@@ -8,15 +8,15 @@ interface MaskedValue {
 const maskit = (rawInput: string, mask: string, escapedCharacters: number): MaskedValue => {
   const input: string[] = rawInput.split('');
   const maskArray: string[] = mask.split('');
-  const nextChar: string = input.pop();
+  const nextChar: string = input.pop() || '';
   let position: number = input.length + escapedCharacters;
   let escaped: number = 0;
   let char: string = '';
 
-  if (tokens[maskArray[position]] && tokens[maskArray[position]].continue) {
+  if (tokens[maskArray[position]]?.continue) {
     char = maskArray[maskArray.length - 2];
-    if (tokens[char].pattern && tokens[char].pattern.test(nextChar)) {
-      input.push(tokens[char].transform ? tokens[char].transform(nextChar) : nextChar);
+    if (tokens[char]?.pattern?.test(nextChar)) {
+      input.push(tokens[char].transform !== undefined ? tokens[char]?.transform(nextChar) : nextChar);
     }
     return {
       escaped,
@@ -25,10 +25,10 @@ const maskit = (rawInput: string, mask: string, escapedCharacters: number): Mask
   }
 
   if (position >= maskArray.length) {
-    if (tokens[maskArray[maskArray.length - 1]] && tokens[maskArray[maskArray.length - 1]].continue) {
+    if (tokens[maskArray[maskArray.length - 1]]?.continue) {
       char = maskArray[maskArray.length - 2];
-      if (tokens[char].pattern && tokens[char].pattern.test(nextChar)) {
-        input.push(tokens[char].transform ? tokens[char].transform(nextChar) : nextChar);
+      if (tokens[char]?.pattern?.test(nextChar)) {
+        input.push(tokens[char].transform !== undefined ? tokens[char]?.transform(nextChar) : nextChar);
       }
     }
 
@@ -39,7 +39,7 @@ const maskit = (rawInput: string, mask: string, escapedCharacters: number): Mask
   }
 
   while (!tokens[maskArray[position]] || tokens[maskArray[position]].escape) {
-    if (tokens[maskArray[position]] && tokens[maskArray[position]].escape) { position++; escaped++; }
+    if (tokens[maskArray[position]]?.escape) { position++; escaped++; }
 
     if (maskArray[position] === nextChar) {
       input.push(maskArray[position]);
@@ -54,8 +54,8 @@ const maskit = (rawInput: string, mask: string, escapedCharacters: number): Mask
   }
 
   char = maskArray[position];
-  if (tokens[char].pattern && tokens[char].pattern.test(nextChar)) {
-    input.push(tokens[char].transform ? tokens[char].transform(nextChar) : nextChar);
+  if (tokens[char]?.pattern?.test(nextChar)) {
+    input.push(tokens[char].transform !== undefined ? tokens[char]?.transform(nextChar) : nextChar);
     position++;
   }
 
@@ -63,7 +63,7 @@ const maskit = (rawInput: string, mask: string, escapedCharacters: number): Mask
 
   while (position < maskArray.length) {
     if (tokens[maskArray[position]] && !tokens[maskArray[position]].escape) { completedOutput = ''; break; }
-    if (tokens[maskArray[position]] && tokens[maskArray[position]].escape) {
+    if (tokens[maskArray[position]]?.escape) {
       position++;
       completedOutput += maskArray[position];
       position++;

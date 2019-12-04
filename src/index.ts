@@ -20,11 +20,12 @@ export default {
     el.dispatchEvent(new CustomEvent('input'));
   },
 
-  bind(el: HTMLInputElement, { value }): void {
-    if (!(/input/i).test(el.tagName) || !(/text/i).test(el.type) || value === 0) { return; }
+  bind(el: HTMLInputElement, { value }: { value: string }): void {
+    if (!(/input/i).test(el.tagName) || !(/text/i).test(el.type) || value.length === 0) { return; }
 
-    el.addEventListener('input', (e: InputEvent): void => {
-      if ((/(delete|backspace)/i).test(e.inputType) || !e.isTrusted) { return; }
+    el.addEventListener('input', (e: Event): void => {
+      const { inputType, isTrusted } = e as InputEvent;
+      if ((/(delete|backspace)/i).test(inputType) || !isTrusted) { return; }
       el.value = applyTheMask(el.value, value);
       el.dispatchEvent(new CustomEvent('input'));
     });

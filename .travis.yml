@@ -9,6 +9,8 @@ jobs:
       script: npm run lint
       name: Unit Tests
       script: npm t
+      name: Build Test
+      script: npm run build
 
 install:
   - npm i

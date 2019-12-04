@@ -2,11 +2,15 @@
   "name": "vue-mask-directive",
   "version": "1.0.0",
   "description": "A rewrite of vue-the-mask using typescript and focusing on making the directive approach more usable.",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "files": [
+    "dist/"
+  ],
   "scripts": {
     "coverage": "jest --coverage",
     "lint": "tslint -c tslint.json 'src/**/*.ts'",
-    "test": "jest"
+    "test": "jest",
+    "build": "tsc"
   },
   "repository": {
     "type": "git",
