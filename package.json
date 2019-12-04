@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "tslint -c tslint.json 'src/**/*.ts'"
+    "coverage": "jest --coverage",
+    "lint": "tslint -c tslint.json 'src/**/*.ts'",
+    "test": "jest"
   },
   "repository": {
     "type": "git",

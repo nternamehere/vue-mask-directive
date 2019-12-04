@@ -7,8 +7,8 @@ jobs:
     - stage: Tests
       name: Lint Test
       script: npm run lint
-      # name: Unit Tests
-      # script: npm run test
+      name: Unit Tests
+      script: npm t
 
 install:
   - npm i

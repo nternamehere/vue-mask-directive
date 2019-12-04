@@ -39,9 +39,14 @@ const maskit = (rawInput: string, mask: string, escapedCharacters: number): Mask
   }
 
   while (!tokens[maskArray[position]] || tokens[maskArray[position]].escape) {
-    if (tokens[maskArray[position]] && tokens[maskArray[position]].escape) {
-      position++;
-      escaped++;
+    if (tokens[maskArray[position]] && tokens[maskArray[position]].escape) { position++; escaped++; }
+
+    if (maskArray[position] === nextChar) {
+      input.push(maskArray[position]);
+      return {
+        escaped,
+        value: input.join(''),
+      };
     }
 
     input.push(maskArray[position]);
@@ -51,11 +56,27 @@ const maskit = (rawInput: string, mask: string, escapedCharacters: number): Mask
   char = maskArray[position];
   if (tokens[char].pattern && tokens[char].pattern.test(nextChar)) {
     input.push(tokens[char].transform ? tokens[char].transform(nextChar) : nextChar);
+    position++;
+  }
+
+  let completedOutput: string = '';
+
+  while (position < maskArray.length) {
+    if (tokens[maskArray[position]] && !tokens[maskArray[position]].escape) { completedOutput = ''; break; }
+    if (tokens[maskArray[position]] && tokens[maskArray[position]].escape) {
+      position++;
+      completedOutput += maskArray[position];
+      position++;
+      continue;
+    }
+
+    completedOutput += maskArray[position];
+    position++;
   }
 
   return {
     escaped,
-    value: input.join(''),
+    value: input.join('') + completedOutput,
   };
 };
 
