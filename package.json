@@ -1,7 +1,7 @@
 {
   "name": "vue-mask-directive",
   "version": "1.0.0",
-  "description": "",
+  "description": "A rewrite of vue-the-mask using typescript and focusing on making the directive approach more usable.",
   "main": "index.js",
   "scripts": {
     "coverage": "jest --coverage",
@@ -12,7 +12,7 @@
     "type": "git",
     "url": "git+https://github.com/nternamehere/vue-mask-directive.git"
   },
-  "author": "",
+  "author": "Jonathan Evans",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/nternamehere/vue-mask-directive/issues"

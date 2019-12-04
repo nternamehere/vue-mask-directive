@@ -12,3 +12,7 @@ jobs:
 
 install:
   - npm i
+
+branches:
+  only:
+  - master
