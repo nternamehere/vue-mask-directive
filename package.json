@@ -1,5 +1,5 @@
 {
-  "name": "vue-mask-directive",
+  "name": "vue-masked-directive",
   "version": "1.0.0",
   "description": "A rewrite of vue-the-mask using typescript and focusing on making the directive approach more usable.",
   "main": "dist/index.js",
