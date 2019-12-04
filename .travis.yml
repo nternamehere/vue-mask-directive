@@ -1,0 +1,20 @@
+language: node_js
+node_js:
+  - "12.13"
+
+jobs:
+  include:
+    - stage: Tests
+      name: Lint Test
+      script: npm run lint
+      name: Unit Tests
+      script: npm t
+      name: Build Test
+      script: npm run build
+
+install:
+  - npm i
+
+branches:
+  only:
+  - master

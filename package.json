@@ -1,0 +1,33 @@
+{
+  "name": "vue-mask-directive",
+  "version": "1.0.0",
+  "description": "A rewrite of vue-the-mask using typescript and focusing on making the directive approach more usable.",
+  "main": "dist/index.js",
+  "files": [
+    "dist/"
+  ],
+  "scripts": {
+    "coverage": "jest --coverage",
+    "lint": "tslint -c tslint.json 'src/**/*.ts'",
+    "test": "jest",
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nternamehere/vue-mask-directive.git"
+  },
+  "author": "Jonathan Evans",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nternamehere/vue-mask-directive/issues"
+  },
+  "homepage": "https://github.com/nternamehere/vue-mask-directive#readme",
+  "devDependencies": {
+    "@types/jest": "^24.0.23",
+    "jest": "^24.9.0",
+    "ts-jest": "^24.2.0",
+    "tslint": "^5.20.1",
+    "typescript": "^3.7.3"
+  },
+  "dependencies": {}
+}
