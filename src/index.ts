@@ -1,4 +1,10 @@
 import applyTheMask from './applyTheMask';
+import demask from './demask';
+
+export {
+  applyTheMask,
+  demask,
+};
 
 export default {
   inserted(el: HTMLInputElement, { value }: { value: string }): void {
@@ -16,7 +22,9 @@ export default {
       el.placeholder = value;
     }
 
-    el.value = applyTheMask(el.value, value);
+    const masked: string = applyTheMask(el.value, value);
+    el.setAttribute('mask-raw-value', masked);
+    el.value = masked;
     el.dispatchEvent(new CustomEvent('input'));
   },
 
@@ -26,7 +34,9 @@ export default {
     el.addEventListener('input', (e: Event): void => {
       const { inputType, isTrusted } = e as InputEvent;
       if ((/(delete|backspace)/i).test(inputType) || !isTrusted) { return; }
-      el.value = applyTheMask(el.value, value);
+      const masked: string = applyTheMask(el.value, value);
+      el.setAttribute('mask-raw-value', masked);
+      el.value = masked;
       el.dispatchEvent(new CustomEvent('input'));
     });
   },
